@@ -14,6 +14,8 @@ Setup on Linux
     apt-get install npm
     apt-get install mysql-server
     apt-get install mysql-client
+    apt-get install node-legacy
+    npm install -g node-gyp
 
     cd ~/dev
     git clone https://github.com/TripThru/socketApi.git
