@@ -1,8 +1,8 @@
 socketApi
 =========
 
-A first pass at a dual interface api for tripthru. Supports actions over http and websockets. 
-Mostly POC right now with very limited apicoverage (pretty much just createTrip)
+A first pass at a dual interface api for tripthru that supports actions over http and websockets. 
+Mostly POC right now with very limited api coverage (pretty much just createTrip)
 
 An import script uses a primitive socket based api client to pull trips from existing mongo db
 and push to new api. Currently trips are stored in a mysql db.
