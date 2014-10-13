@@ -1,0 +1,29 @@
+{
+  "name": "tripthru_api",
+  "version": "0.0.0",
+  "private": true,
+  "description": "",
+  "author": "geochap",
+  "engines": {
+    "node": "~0.10.0"
+  },
+  "dependencies": {
+    "express": "*",
+    "express-session": "*",
+    "lodash": "*",
+    "body-parser": "*",
+    "morgan":"*",
+    "mysql": "*",
+    "pwd": "*",
+    "request": "*",
+    "mongodb": "*",
+    "socket.io": "*",
+    "socket.io-client": "*",
+    "async": "*",
+    "moment": "*"
+ },
+  "devDependencies": {
+  },
+  "comment": {
+  }
+}

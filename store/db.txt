@@ -1,0 +1,94 @@
+create database tripthru;
+
+use tripthru;
+
+create table user (
+  id integer auto_increment,
+  username varchar(32) not null,
+  email varchar(128) not null,
+  pwdhash varchar(512) not null,
+  salt varchar(512) not null,
+  isadmin integer not null,
+  partner_id integer,
+  created datetime not null,
+  last_login datetime,
+  primary key(id)
+) engine=InnoDB;
+create unique index user_username on user(username);
+
+create table partner (
+  id integer auto_increment,
+  name varchar(128),
+  primary key(id)
+) engine=InnoDB;
+create unique index partner_name on partner(name);
+
+create table fleet (
+  id integer auto_increment,
+  partner_id integer not null,
+  name varchar(128) not null,
+  primary key(id)
+) engine=InnoDB;
+create unique index fleet_partner_name on fleet(partner_id, name);
+
+create table trip (
+  id bigint auto_increment,
+  partner_id integer not null,
+  driver_id integer,
+  code varchar(128) not null,
+  status integer not null,
+  dispatch_time datetime,
+  pickup_time datetime,
+  pickup_lat float,
+  pickup_lon float,
+  pickup_eta datetime,
+  dropoff_time datetime,
+  dropoff_lat float,
+  dropoff_lon float,
+  dropoff_eta datetime,
+  distance float,
+  price float,
+  passenger_name varchar(128),
+  passenger_count integer,
+  luggage_count integer,
+  message varchar(256),
+  created datetime not null,
+  last_update datetime not null,
+  primary key(id)
+) engine=InnoDB;
+create unique index trip_partner_code on trip(partner_id, code);
+
+create table trip_status (
+  id integer,
+  status varchar(128) not null,
+  primary key(id)
+) engine=InnoDB;
+create unique index trip_status_status on trip_status(status);
+
+insert into trip_status values(0, 'pending');
+insert into trip_status values(1, 'dispatched');
+insert into trip_status values(2, 'enroute');
+insert into trip_status values(3, 'arrivedandwaiting');
+insert into trip_status values(4, 'pickedup');
+insert into trip_status values(5, 'droppedoff');
+insert into trip_status values(6, 'complete');
+insert into trip_status values(7, 'cancelled');
+
+create table driver (
+  id integer auto_increment,
+  code varchar(128) not null,
+  fleet_id integer not null,
+  name varchar(128) not null,
+  primary key(id)
+) engine=InnoDB;
+create unique index driver_fleet_code on driver(fleet_id, code);
+
+create table event_log (
+  id bigint auto_increment,
+  user_id integer not null,
+  event_time datetime not null,
+  event_type varchar(256),
+  event_data mediumtext,
+  primary key(id)
+) engine=InnoDB;
+create index event_log_time on event_log(event_time);
